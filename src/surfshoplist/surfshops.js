@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SurfShopDetail from "./surfshopdetail";
-import axios from 'axios'
 import SurfForm from "./surfshopform";
+import axios from 'axios'
 
 
 class SurfShopList extends Component {
@@ -44,7 +44,9 @@ class SurfShopList extends Component {
     render() {
         return(
             <div>
-                <SurfForm/>
+                <div>
+                    <SurfForm/>
+                </div>
                 {this.state.surfShopData.map((item) => {
                     return (
                         <h3 key={item.id} onClick={ () => this.showSurfShopDetail(item)}>

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-
+import axios from "axios";
+import Surfshopupdate from "./surfshopupdate";
 
 class SurfShopDetail extends Component {
     constructor(props) {
@@ -8,7 +9,23 @@ class SurfShopDetail extends Component {
             showComponent: false,
         };
         this.updateSurfShopDetails = this.updateSurfShopDetails.bind(this);
+        this.deleteSurfShop = this.deleteSurfShop.bind(this);
     }
+
+    updateSurfShopDetails() {
+        this.setState({ showComponent: true })
+    }
+    deleteSurfShop(obj) {
+        console.log(obj);
+        axios.delete("http://127.0.0.1:8000".concat(obj))
+            .then((response) => {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
     render() {
         const obj = this.props.surfShopDetail;
         return (
@@ -31,7 +48,13 @@ class SurfShopDetail extends Component {
                 >
                     Update
                 </button>
-                {this.state.showComponent ? <surfShopUpdate surfShopUpdate={obj} /> : null}
+
+                <button
+                    style={{ backgroundColor: "white" }}
+                    onClick={() => this.deleteSurfShop(obj.delete)}>
+                    Delete
+                </button>
+                {this.state.showComponent ? <Surfshopupdate surfShopUpdate={obj} /> : null}
             </div>
         );
     }
